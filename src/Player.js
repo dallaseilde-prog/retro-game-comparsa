@@ -11,9 +11,8 @@ export class Player {
     this.jumpForce = 250;
     this.gravity = 550;
     this.grounded = false;
-    this.color = '#00f';
+    this.color = '#00f2ff';
   }
-
   reset(x, y) {
     this.x = x * this.game.tilemap.tileSize;
     this.y = y * this.game.tilemap.tileSize;
@@ -21,19 +20,16 @@ export class Player {
     this.vy = 0;
     this.grounded = false;
   }
-
   update(dt) {
     const input = this.game.input;
     if (input.isDown('ArrowLeft') || input.isDown('KeyA')) this.vx = -this.speed;
     else if (input.isDown('ArrowRight') || input.isDown('KeyD')) this.vx = this.speed;
     else this.vx = 0;
-
     if ((input.isDown('Space') || input.isDown('ArrowUp') || input.isDown('KeyW')) && this.grounded) {
       this.vy = -this.jumpForce;
       this.grounded = false;
       this.game.audio.playJump();
     }
-
     this.vy += this.gravity * dt;
     this.x += this.vx * dt;
     this.checkHorizontalCollisions();
@@ -42,7 +38,6 @@ export class Player {
     this.checkInteractions();
     if (this.y > this.game.height) this.game.die();
   }
-
   checkHorizontalCollisions() {
     const ts = this.game.tilemap.tileSize;
     const tm = this.game.tilemap;
@@ -58,7 +53,6 @@ export class Player {
         this.vx = 0;
     }
   }
-
   checkVerticalCollisions() {
     const ts = this.game.tilemap.tileSize;
     const tm = this.game.tilemap;
@@ -76,7 +70,6 @@ export class Player {
         this.vy = 0;
     }
   }
-
   checkInteractions() {
     const ts = this.game.tilemap.tileSize;
     const tm = this.game.tilemap;
@@ -87,7 +80,6 @@ export class Player {
     else if (tile === 3) this.game.winLevel();
     else if (tile === 4) this.game.die();
   }
-
   draw(ctx) {
     ctx.fillStyle = this.color;
     ctx.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);

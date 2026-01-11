@@ -5,7 +5,6 @@ export class Tilemap {
     this.width = 0;
     this.height = 0;
   }
-
   load(levelMatrix) {
     this.map = levelMatrix;
     this.height = levelMatrix.length;
@@ -16,7 +15,6 @@ export class Tilemap {
         if (this.map[y][x] === 2) coffee++;
     return coffee;
   }
-
   draw(ctx) {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
@@ -24,33 +22,37 @@ export class Tilemap {
         const px = x * this.tileSize;
         const py = y * this.tileSize;
         if (tile === 1) {
-          ctx.fillStyle = '#654321';
+          ctx.fillStyle = '#330066'; 
           ctx.fillRect(px, py, this.tileSize, this.tileSize);
+          ctx.fillStyle = '#ff007f'; 
+          ctx.fillRect(px, py, this.tileSize, 2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+          ctx.fillRect(px + 4, py + 4, this.tileSize - 8, this.tileSize - 8);
         } else if (tile === 2) {
-          ctx.fillStyle = '#C0392B';
+          ctx.fillStyle = '#ffd700';
           ctx.beginPath();
-          ctx.arc(px + this.tileSize/2, py + this.tileSize/2, 4, 0, Math.PI*2);
+          ctx.arc(px + this.tileSize/2, py + this.tileSize/2, 5, 0, Math.PI*2);
           ctx.fill();
         } else if (tile === 3) {
-          ctx.fillStyle = '#F1C40F';
-          ctx.fillRect(px + 4, py + 4, this.tileSize - 8, this.tileSize - 8);
+          ctx.fillStyle = '#00f2ff';
+          ctx.fillRect(px + 2, py + 2, this.tileSize - 4, this.tileSize - 4);
+          ctx.strokeStyle = '#fff';
+          ctx.strokeRect(px + 4, py + 4, this.tileSize - 8, this.tileSize - 8);
         } else if (tile === 4) {
-          ctx.fillStyle = '#999';
+          ctx.fillStyle = '#ff4d4d';
           ctx.beginPath();
           ctx.moveTo(px, py + this.tileSize);
-          ctx.lineTo(px + this.tileSize/2, py);
+          ctx.lineTo(px + this.tileSize/2, py + 4);
           ctx.lineTo(px + this.tileSize, py + this.tileSize);
           ctx.fill();
         }
       }
     }
   }
-
   getTile(col, row) {
     if (col < 0 || col >= this.width || row < 0 || row >= this.height) return 1;
     return this.map[row][col];
   }
-
   removeCoffee(col, row) {
     if (this.map[row][col] === 2) {
       this.map[row][col] = 0;
