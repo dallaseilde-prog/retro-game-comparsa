@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Game Comparsa</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    <canvas id="gameCanvas"></canvas>
-    <script type="module" src="./main.js"></script>
-</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Andean Retro Adventure</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="game-container">
+      <canvas id="gameCanvas" width="320" height="240"></canvas>
+      <div class="scanlines"></div>
+    </div>
+    <div id="ui-layer">
+      <div id="hud">
+        <span>COFFEE: <span id="score">0</span>/<span id="total-coffee">0</span></span>
+        <span>LEVEL: <span id="level">1</span></span>
+      </div>
+      <div id="overlay" class="hidden">
+        <h1 id="overlay-title">TITLE</h1>
+        <p id="overlay-message">PRESS ENTER</p>
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
 </html>

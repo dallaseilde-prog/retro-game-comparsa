@@ -1,16 +1,108 @@
-body {
-    margin: 0;
-    overflow: hidden;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+:root {
+  --bg-color: #222;
+  --text-color: #eee;
+  --accent-color: #ffd700;
 }
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+#game-container {
+  position: relative;
+  width: 640px;
+  height: 480px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
 canvas {
-    background: #333;
-    image-rendering: pixelated;
-    border: 4px solid #fff;
-    max-width: 100%;
-    max-height: 100%;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  background-color: #333;
+}
+
+.scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.2)
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 480px;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#hud {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  text-shadow: 2px 2px 0 #000;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 20;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+  text-align: center;
+}
+
+#overlay.hidden {
+  display: none;
+}
+
+#overlay h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  text-shadow: 4px 4px 0 #000;
+}
+
+#overlay p {
+  font-size: 24px;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
